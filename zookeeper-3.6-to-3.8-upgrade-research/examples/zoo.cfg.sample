@@ -1,0 +1,26 @@
+# Minimal, annotated zoo.cfg used by test_upgrade_config_guards_example.py
+# This is a generic Apache ZooKeeper 3.8-style config for illustration only.
+
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/var/lib/zookeeper/data
+dataLogDir=/var/lib/zookeeper/log
+clientPort=2181
+
+# Autopurge keeps snapshot/txnlog growth bounded.
+autopurge.snapRetainCount=5
+autopurge.purgeInterval=24
+
+# Ensemble membership (example 3-node quorum).
+server.1=zk1:2888:3888
+server.2=zk2:2888:3888
+server.3=zk3:2888:3888
+
+# --- Rollback-safety zone (see 02-compatibility-and-rollback.md section 4) ---
+# During a mixed-version (e.g. 3.6 + 3.8) window, newer-only on-disk features MUST stay off so an
+# older binary can still read what a newer node wrote. The example test asserts these are unset or
+# explicitly disabled. Flip any of them on and the test fails by design.
+#
+# snapshot.compression.method=gz        # <-- newer-only on-disk format; keep OFF in mixed window
+# (add any other setting your build documents as changing the on-disk/serialization format)
