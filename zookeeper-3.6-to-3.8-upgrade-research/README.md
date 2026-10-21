@@ -5,9 +5,11 @@ Apache ZooKeeper **server** ensemble from the **3.6.x** line to the **3.8.x** li
 against 3.8.4). It focuses on what changes between the two releases, how to roll the upgrade out
 safely with a working rollback path, and how to test it so nothing breaks after rollout.
 
-All statements here are about **upstream Apache ZooKeeper** and are drawn from the official
-Apache documentation and release notes. Nothing in this pack is specific to any particular
-deployment, company, or fork.
+All of docs 01–03 and the examples are about **upstream Apache ZooKeeper** and are drawn from the
+official Apache documentation and release notes — nothing in them is specific to any particular
+deployment, company, or fork. Doc 04 is a separate, clearly-labeled **reference appendix** that
+cites only **publicly visible** facts (commits, PRs, branches, tags) from the open-source
+`linkedin/zookeeper` repository, as a concrete real-world example of the forward-port problem.
 
 ## Contents
 
@@ -16,6 +18,7 @@ deployment, company, or fork.
 | [`01-upgrade-overview.md`](01-upgrade-overview.md) | What actually changes 3.6 → 3.8 (logging, JDK, TLS/Netty, metrics, config), and the shape/scope of the upgrade. |
 | [`02-compatibility-and-rollback.md`](02-compatibility-and-rollback.md) | Client/server and quorum compatibility, the rolling-upgrade procedure, and the rollback-safety rules for the mixed-version window. |
 | [`03-testing-strategy.md`](03-testing-strategy.md) | The test layers that give confidence (unit → cross-version → functional → mixed-version/rollback → soak → staged rollout), plus a gap checklist. |
+| [`04-downstream-fork-reference.md`](04-downstream-fork-reference.md) | Reference appendix: a real-world example of the patches a public downstream fork (`linkedin/zookeeper`) carries on top of Apache 3.8.4, and the forward-port debt vs. its long-lived 3.6 branch — sourced entirely from the public repo. |
 | [`examples/`](examples/) | A small, illustrative config-invariant test and a sample upgrade checklist you can adapt. |
 
 ## TL;DR
